@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import react from 'react'
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
+import Navbar from"./Components/Navbar"
+import { ProductProvider } from './ProductContext'
+import ProductTable from './Components/ProductTable'
+import AddProducts from'./Components/AddProducts'
+import UpdateProduct from'./Components/UpdateProduct'
+import { UpdateProductContextProvider } from './UpdateProductContext'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Switch>
+          <ProductProvider>
+            <Navbar/>
+            <div className="row">
+              <div className="col-sm-10 col-xm-12 mr-auto ml-auto mt-4 mb-4">
+                <UpdateProductContextProvider>
+              
+                    <Route exact path='/' component={ProductTable} />
+                    <Route exact path='/updateproduct' component={UpdateProduct} />
+                  
+                    <Route exact path="/addproducts" component={AddProducts} />
+             
+                </UpdateProductContextProvider>
+              
+              </div>
+            </div>
+          </ProductProvider>
+        </Switch>
+      </Router>
     </div>
   );
 }
